@@ -30,7 +30,7 @@ gulp.task('browser-sync', () =>
       },
     },
     injectchanges: true,
-    open: false,
+    open: true,
     notify: false,
     // tunnel: true,
   })
