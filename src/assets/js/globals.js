@@ -1,0 +1,5 @@
+const BASEPATH = '.';
+
+export {
+  BASEPATH,
+};

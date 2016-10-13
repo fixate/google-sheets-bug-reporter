@@ -1,0 +1,18 @@
+.DS_STORE
+
+# Sass Generated Files
+config.rb
+.sass-cache/
+*.css.map
+
+# compiled folder
+dist
+
+# Node
+node_modules
+npm-debug.log
+
+# Minified Images
+src/assets/img/*
+!src/assets/img/raw
+src/partials/svg/inline-icons.svg.pug
