@@ -1,7 +1,8 @@
-# Boilerplate For Projects With Gulp, React, Redux, Pug, Webpack, BrowserSync, and HMR
+# Google Sheets Bug Submission Form
 
-Quickly set up projects where you need React, Redux, and Webpack, and want to benefit
-from Gulp automation, BrowserSync reloading, and Pug templates.
+A starter for quickly creating a bug reporting form to submit to Google Sheets.
+
+Uses Foundation for styling.
 
 Tasks are managed in `gulp/tasks`.
 
@@ -15,28 +16,24 @@ $ npm install
 
 ## Getting Down To Business
 
-```shell
-$ gulp
-```
-
-## Tests
-
-Tests can be run for specific files when only those files are changed.
-
-Format for tests is as follows:
-
-```
-./App.js
-./App_test.js
-```
-
-Changes in App.js or App_test.js will run App_test.js. Changes in files that do
-not have tests will run entire suite.
-
-Running tests continuously:
+Dev:
 
 ```shell
-$ gulp watch:tests
+$ npm run dev
+```
+
+Build:
+
+```shell
+# build to ./dist
+$ npm run build
+```
+
+Deploy to AWS:
+
+```shell
+# add environment variables to .env, and use autoenv
+$ npm run deploy:aws
 ```
 
 ### License
