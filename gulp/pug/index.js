@@ -1,21 +1,21 @@
 module.exports = {
   common: {
     data: {
-
+      siteName: 'Your Site',
     },
   },
 
   dev: {
     data: {
       basePath: '',
-      googleSheetsUrl: 'http://google.com/'
+      googleSheetsUrl: 'devsheet-address',
     },
   },
 
   dist: {
     data: {
       basePath: '',
-      googleSheetsUrl: 'http://google.com/'
+      googleSheetsUrl: 'prodsheet-address',
     },
   },
 }

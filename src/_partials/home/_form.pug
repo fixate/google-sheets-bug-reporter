@@ -1,0 +1,156 @@
+.column.small-12.medium-8.large-7.small-centered
+	header.text-center
+		h1.signup-form__title
+			| Report A Bug For #{siteName}
+
+.js-form-container.column.small-12.medium-8.large-7.small-centered
+	p.text-center
+		| There are a few guidelines for writing effective bugs, the main points
+		| being:
+
+	ul
+		li defining what you expected to happen
+		li what happened instead
+		li and how to reproduce the bug
+
+	+field-help()
+		p
+			| Please read
+			= ' '
+			a(href="https://developer.mozilla.org/en-US/docs/Mozilla/QA/Bug_writing_guidelines")
+				| this guide
+			| which will help you to write good bug reports. A good bug report ensures
+			| problems can be resolved faster and more effectively!
+
+	form.row.js-bug-form(method="post")
+		.column.small-12.large-6
+			+input-field(
+				name="name",
+				labelText="Your Name",
+			)
+
+		.column.small-12.large-6
+			+input-field(
+				name="email",
+				labelText="Email Address",
+			)
+
+		.column.small-12.large-6
+			+select-field(
+				labelText='Browser',
+				name='browser',
+				options=[
+					{
+						text: 'select your browser...',
+						disabled: true,
+						value: '',
+						selected: true,
+					},
+					{ value: 'Chrome', },
+					{ value: 'Firefox', },
+					{ value: 'Safari', },
+					{ value: 'InternetExplorer', },
+					{ value: 'other', },
+				],
+			)
+
+		.column.small-12.large-6
+			+input-field(
+				labelText='Browser Version',
+				name='browserVersion'
+			)
+
+			+field-help()
+				p
+					small
+						a(href='http://www.whatsmybrowser.org/', target='_blank')
+							| Help me find my browser version
+
+		.column.small-12.large-6
+			+select-field(
+				labelText='Operating System',
+				name='operatingSystem',
+				options=[
+					{
+						text: 'select your operating system...',
+						value: '',
+						disabled: 'disabled',
+						selected: true,
+					},
+					{ value: 'MacOS 10.12 Sierra', },
+					{ value: 'MacOSX 10.11 El Capitan', },
+					{ value: 'Windows 10', },
+					{ value: 'Windows 8', },
+					{ value: 'iOS 8', },
+					{ value: 'iOS 9', },
+					{ value: 'iOS 10', },
+					{ value: 'Android Nougat', },
+					{ value: 'Android Marshmellow', },
+					{ value: 'Android Lollipop', },
+					{ value: 'Android KitKat', },
+					{ value: 'other', },
+				],
+			)
+
+		.column.small-12.large-6.align-self-middle
+			+field-help()
+				p
+					small
+						a(href='http://whatsmyos.com/', target="_blank")
+							| Help me find my operating system
+
+		.column.small-12
+			+textarea-field(
+				name="expectedResult",
+				labelText="What did you expect?",
+				rows=3,
+			)
+
+		.column.small-12
+			+textarea-field(
+				name="actualResult",
+				labelText="What happened instead?",
+				rows=3,
+			)
+
+		.column.small-12
+			+input-field(
+				name="pageUrl",
+				labelText="Link to the page where the bug was found",
+				type="url",
+				placeholder="http://..."
+			)
+
+		.column.small-12
+			+textarea-field(
+				name="reproductionSteps",
+				labelText="How I reproduce the issue",
+				rows=10,
+				placeholder="1. Firstly, ...\n2. ..."
+			)
+
+		.column.small-12.large-6
+			+textarea-field(
+				name="screenshotLinks",
+				labelText="Do you have any screenshots of the bug?",
+				placeholder="1. http://...\n2. http://....",
+				rows=5,
+			)
+
+		.column.small-12.large-6.align-self-middle
+			+field-help()
+				p
+					small
+						a(href='http://droplr.com/', target='_blank')
+							| I need something that makes sharing screenshots easy
+
+		.column.small-12
+			+textarea-field(
+				name="notes",
+				labelText="Anything else that may assist in fixing the problem?",
+				rows=5,
+			)
+
+		.column.small-12
+			.text-right
+				button.button(type="submit") submit bug

@@ -5,7 +5,9 @@ html
 	include ../_partials/_head.pug
 
 	body
-		block content
+		.callout.large
+			.row
+				block content
 
 		script.
 			window.googleSheetsUrl = "#{googleSheetsUrl}";

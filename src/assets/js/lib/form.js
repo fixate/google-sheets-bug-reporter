@@ -2,31 +2,27 @@ import 'whatwg-fetch';
 import serialize from '@f/serialize-form';
 import validate from 'validate.js';
 
-export default function signupFactory({ formElem, successClassName }) {
-  const form = formElem;
+export default function formFactory({ formContainerElem, successElem }) {
+  const form = formContainerElem.querySelector('form');
 
-  const inputs = form.querySelectorAll('input');
+  const controls = form.querySelectorAll('input, textarea, select');
   const submitButton = form.querySelector('button');
+  const submitButtonText = submitButton.innerHTML;
+  const hiddenClassName = 'is-hidden';
+
   const validators = {
     name: { presence: true },
     email: {
       presence: true,
       email: true,
     },
-    telephone: { presence: true },
-    postcode: {
-      presence: true,
-      length: {
-        is: 4,
-        message: 'postal code must contain 4 digits',
-      },
-      numericality: {
-        onlyInteger: true,
-        message: 'postal code must contain 4 digits',
-      },
-    },
-    numberRooms: { presence: true },
-    numberBathrooms: { presence: true },
+    browser: { presence: true },
+    browserVersion: { presence: true },
+    operatingSystem: { presence: true },
+    expectedResult: { presence: true },
+    actualResult: { presence: true },
+    pageUrl: { presence: true, url: true },
+    reproductionSteps: { presence: true },
   };
   let isWaiting = false;
 
@@ -43,8 +39,8 @@ export default function signupFactory({ formElem, successClassName }) {
   }
 
   function updateInput(elemName, error) {
-    const errorClassName = 'field--error';
-    const elem = [...inputs].reduce((acc, input) => (
+    const errorClassName = 'asd';
+    const elem = [...controls].reduce((acc, input) => (
       input.getAttribute('name') === elemName ? input : acc
     ), null);
 
@@ -60,7 +56,7 @@ export default function signupFactory({ formElem, successClassName }) {
     if (error) {
       elem.insertAdjacentHTML(
         'afterend',
-        `<span class="field__text">${error[0]}</span>`
+        `<p><small class="form-error is-visible">${error[0]}</small></p>`
       );
       elem.parentNode.classList.add(errorClassName);
     }
@@ -76,16 +72,17 @@ export default function signupFactory({ formElem, successClassName }) {
 
   function setWaiting() {
     isWaiting = true;
-    submitButton.innerText = 'sending...';
+    submitButton.innerHTML = 'sending...';
   }
 
   function unsetWaiting() {
     isWaiting = false;
-    submitButton.innerText = 'submit';
+    submitButton.innerHTML = submitButtonText;
   }
 
-  function showSuccess() {
-    document.body.classList.add(successClassName);
+  function handleSuccess() {
+    successElem.classList.remove(hiddenClassName);
+    formContainerElem.classList.add(hiddenClassName);
   }
 
   function handleSubmit(e) {
@@ -107,16 +104,19 @@ export default function signupFactory({ formElem, successClassName }) {
       // Google Apps Scripts seems to only want a query string... ok then.
       fetch(`${window.googleSheetsUrl}?${queryString}`, {
         method: 'POST',
-      }).then((response) => {
-        if (response.status === 200) {
-          unsetWaiting();
-          showSuccess();
-          form.reset();
-        }
-      // eslint-disable-next-line no-unused-vars
-      }).catch((response) => {
-        // console.error(response);
-      }).then(unsetWaiting, unsetWaiting);
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            unsetWaiting();
+            handleSuccess();
+            form.reset();
+          }
+        })
+        // eslint-disable-next-line no-unused-vars
+        .catch((response) => {
+          // console.error(response);
+        })
+        .then(unsetWaiting, unsetWaiting);
     }
   }
 
