@@ -1,0 +1,14 @@
+include ../_mixins/_all.pug
+
+doctype html
+html
+	include ../_partials/_head.pug
+
+	body
+		block content
+
+		// build:js /assets/js/app.bundle.min.js
+		script(src=basePath+"/assets/js/app.bundle.js")
+		// endbuild
+
+		block scripts-footer

@@ -3,6 +3,8 @@ const devAssets = `${devPath}/assets`;
 const distPath = 'dist';
 const distAssets = `${distPath}/assets`;
 
+const pugData = require('./pug');
+
 const config = {
   path: {
     dev: {
@@ -23,25 +25,7 @@ const config = {
     }
   },
 
-  pug: {
-    common: {
-      data: {
-
-      },
-    },
-
-    dev: {
-      data: {
-        basePath: '',
-      },
-    },
-
-    dist: {
-      data: {
-        basePath: '',
-      },
-    },
-  },
+  pug: pugData,
 };
 
 module.exports = config;

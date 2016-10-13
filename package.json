@@ -1,10 +1,11 @@
 {
   "author": "Fixate",
   "version": "0.0.0",
-  "name": "project-name",
+  "name": "google-sheets-bug-reporter-form",
   "scripts": {
-    "debug": "browserify ./src/assets/js/**/*_test.js -t babelify |  devtool",
-    "start": "gulp",
+    "deploy:aws": "source ./scripts/deploy-aws.sh",
+    "dev": "gulp",
+    "build": "gulp build",
     "test": "`which babel-tape-runner` ./src/assets/js/**/*_test.js | faucet",
     "update": "./node_modules/.bin/updtr"
   },
@@ -68,11 +69,10 @@
     "webpack-hot-middleware": "^2.10.0"
   },
   "dependencies": {
+    "@f/serialize-form": "^1.0.0",
     "babel-polyfill": "^6.9.0",
     "object.assign": "^4.0.4",
-    "react": "^15.2.1",
-    "react-dom": "^15.2.1",
-    "react-redux": "^4.4.5",
-    "redux": "^3.5.2"
+    "validate.js": "^0.10.0",
+    "whatwg-fetch": "^1.0.0"
   }
 }
