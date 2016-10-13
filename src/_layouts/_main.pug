@@ -7,6 +7,9 @@ html
 	body
 		block content
 
+		script.
+			window.googleSheetsUrl = "#{googleSheetsUrl}";
+
 		// build:js /assets/js/app.bundle.min.js
 		script(src=basePath+"/assets/js/app.bundle.js")
 		// endbuild
