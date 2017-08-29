@@ -4,7 +4,7 @@ date=$(date +%Y_%m_%d_%H_%M_%S)
 backup_folder="/${backup_root_name}/${date}"
 region=[your-region]
 bucket=s3://[your-bucket]
-local_folder=./dist
+local_folder=./build
 
 printf "backing up existing site to $backup_folder...\n"
 

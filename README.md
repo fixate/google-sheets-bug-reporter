@@ -25,7 +25,7 @@ $ npm run dev
 Build:
 
 ```shell
-# build to ./dist
+# build to ./build
 $ npm run build
 ```
 

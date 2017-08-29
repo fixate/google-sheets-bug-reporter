@@ -1,16 +1,16 @@
-const gulp                 = require('gulp');
-const webpack              = require('webpack');
+const gulp = require('gulp');
+const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
-const conf          = require('../gulpconfig');
+const conf = require('../gulpconfig');
 const webpackConfig = require('../../webpack.config.dev');
-const bundler       = webpack(webpackConfig);
+const bundler = webpack(webpackConfig);
 
 gulp.task('browser-sync', () =>
   global.browserSync.init({
     server: {
-      baseDir: 'dist',
+      baseDir: 'build',
       middleware: [
         webpackDevMiddleware(bundler, {
           // IMPORTANT: dev middleware can't access config, so we should
@@ -18,12 +18,12 @@ gulp.task('browser-sync', () =>
           publicPath: webpackConfig.output.publicPath,
           stats: {
             colors: true,
-            chunks: false
-          }
+            chunks: false,
+          },
         }),
 
         // bundler should be the same as above
-        webpackHotMiddleware(bundler)
+        webpackHotMiddleware(bundler),
       ],
       routes: {
         '/assets/img': 'src/assets/img',
