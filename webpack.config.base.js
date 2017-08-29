@@ -1,23 +1,75 @@
 const path = require('path');
+const webpack = require('webpack');
 
+const ENV = process.env.NODE_ENV || 'development';
 const conf = require('./gulp/gulpconfig');
 
 module.exports = {
+  context: path.resolve(__dirname, 'src/assets/js'),
+
+  entry: {
+    app: './index.js',
+  },
+
   output: {
-    path: path.join(__dirname, conf.path.dist.js),
-    publicPath: '/assets/js/',
+    path: path.resolve(__dirname, 'build/assets/js'),
+    publicPath: '/',
     filename: '[name].bundle.js',
   },
 
-  externals: {
-    'google': 'google',
-  },
-
   resolve: {
-    alias: {
-      react: path.resolve(__dirname, 'node_modules/react'),
-    },
+    extensions: ['.js', '.json'],
+    modules: [
+      path.resolve(__dirname, 'src/lib'),
+      path.resolve(__dirname, 'node_modules'),
+      'node_modules',
+    ],
   },
 
-  plugins: [],
+  module: {
+    rules: [
+      {
+        test: '/.js$/',
+        exclude: path.resolve(__dirname, 'src'),
+        enforce: 'pre',
+        use: 'source-map-loader',
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: 'babel-loader',
+      },
+    ],
+  },
+
+  plugins: [
+    new webpack.NoEmitOnErrorsPlugin(),
+    // add your specific template in the subfolder's webpack
+    // new HtmlWebpackPlugin({
+    //   template: `src/index.ejs`,
+    //   minify: {collapseWhitespace: true},
+    // }),
+  ],
+
+  stats: {
+    colors: true,
+    chunks: false,
+    modules: false,
+  },
+
+  node: {
+    Buffer: false,
+  },
+
+  devtool: ENV === 'production' ? 'source-map' : 'cheap-module-eval-source-map',
+
+  devServer: {
+    port: process.env.PORT || 8080,
+    host: 'localhost',
+    publicPath: '/',
+    contentBase: './src',
+    historyApiFallback: true,
+    open: true,
+    openPage: '',
+  },
 };

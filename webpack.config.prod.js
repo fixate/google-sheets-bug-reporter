@@ -1,40 +1,41 @@
-const path      = require('path');
-const webpack   = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
 
-const conf      = require('./gulp/gulpconfig');
+const conf = require('./gulp/gulpconfig');
 const webpackBase = require('./webpack.config.base');
 
-module.exports = {
-  entry: {
-    app: './src/assets/js/index.js',
-  },
+module.exports = Object.assign({}, webpackBase, {
+  plugins: webpackBase.plugins.concat([
+    new webpack.optimize.UglifyJsPlugin({
+      output: {
+        comments: false,
+      },
+      compress: {
+        unsafe_comps: true,
+        properties: true,
+        keep_fargs: false,
+        pure_getters: true,
+        collapse_vars: true,
+        unsafe: true,
+        warnings: false,
+        screw_ie8: true,
+        sequences: true,
+        dead_code: true,
+        drop_debugger: true,
+        comparisons: true,
+        conditionals: true,
+        evaluate: true,
+        booleans: true,
+        loops: true,
+        unused: true,
+        hoist_funs: true,
+        if_return: true,
+        join_vars: true,
+        cascade: true,
+        drop_console: true,
+      },
+    }),
+  ]),
 
-  output: webpackBase.output,
-
-  externals: webpackBase.externals,
-
-  resolve: webpackBase.resolve,
-
-  module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loaders: ['babel'],
-      }
-    ],
-  },
-
-  plugins: [].concat.apply([
-      new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.OccurenceOrderPlugin(),
-      new webpack.optimize.UglifyJsPlugin({
-        sourceMap: false,
-      }),
-      new webpack.DefinePlugin({
-        'process.env': {
-          'NODE_ENV': JSON.stringify('production')
-        }
-      }),
-    ], webpackBase.plugins),
-};
+  devtool: 'source-map',
+});
