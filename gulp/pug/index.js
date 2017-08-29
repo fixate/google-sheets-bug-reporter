@@ -18,4 +18,4 @@ module.exports = {
       googleSheetsUrl: 'prodsheet-address',
     },
   },
-}
+};
