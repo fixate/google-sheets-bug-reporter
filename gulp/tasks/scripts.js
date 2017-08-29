@@ -1,71 +1,49 @@
-const gulp    = require('gulp');
-const eslint  = require('gulp-eslint');
+const gulp = require('gulp');
+const eslint = require('gulp-eslint');
 const webpack = require('webpack');
 
 const path = require('../gulpconfig').path;
+const webpackConfDev = require('../../webpack.config.dev');
+const webpackConfProd = require('../../webpack.config.prod');
 
-function runWebPack(config, done) {
-  webpack(config).run(function(err, stats) {
+const runWebPack = (done, env = 'development') => {
+  const webpackConf = env === 'development' ? webpackConfDev : webpackConfProd;
+
+  const cfg = Object.assign({}, webpackConf);
+
+  return webpack(cfg).run(function(err, stats) {
     if (err) {
       console.log('Error', err);
     } else {
-      console.log(stats.toString({ chunks: false }));
+      console.log(
+        stats.toString({chunks: false, modules: false, colors: true})
+      );
     }
 
     return done();
-  })
-}
+  });
+};
 
+//*------------------------------------*\
+//     $SCRIPTS
+//*------------------------------------*/
+gulp.task('scripts', done => runWebPack(done));
 
+//*------------------------------------*\
+//     $SCRIPTS MINIFY
+//*------------------------------------*/
+gulp.task('scripts:minify', done => runWebPack(done, 'production'));
 
+//*------------------------------------*\
+//     $SCRIPTS WATCH
+//*------------------------------------*/
+gulp.task('scripts:watch', ['scripts'], () => global.browserSync.reload());
 
-
-/*------------------------------------*\
-     SCRIPTS
-\*------------------------------------*/
-gulp.task('scripts:minify', function(done) {
-  let webpackConf = require('../../webpack.config.prod');
-
-  return runWebPack(webpackConf, done);
-});
-
-
-
-
-
-/*------------------------------------*\
-     SCRIPTS WATCH
-\*------------------------------------*/
-gulp.task('scripts:watch', ['scripts'],  () => global.browserSync.reload());
-
-
-
-
-
-/*------------------------------------*\
-     SCRIPTS VENDORS
-\*------------------------------------*/
-gulp.task('scripts:vendors', function(done) {});
-  // files = [
-  //   "#{path.dev.js}/vendor.js"
-  // ]
-
-  // runWebPack(entries, {}, done)
-  //
-
-
-
-
-
-/*------------------------------------*\
-     SCRIPTS LINTING
-\*------------------------------------*/
+//*------------------------------------*\
+//     $LINT
+//*------------------------------------*/
 gulp.task('scripts:lint', function() {
-  let files = [
-    `${path.dev.js}/**/*.js`,
-  ];
+  const files = [`${path.dev.js}/**/!(*.bundle).js`, `${path.dev.js}/**/*.jsx`];
 
-  return gulp.src(files)
-    .pipe(eslint())
-    .pipe(eslint.format());
+  return gulp.src(files).pipe(eslint()).pipe(eslint.format());
 });

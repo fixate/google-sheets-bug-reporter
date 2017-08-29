@@ -1,9 +1,5 @@
-const gulp        = require('gulp');
+const gulp = require('gulp');
 const runSequence = require('run-sequence');
-
-
-
-
 
 /*------------------------------------*\
      BUILD
@@ -11,11 +7,7 @@ const runSequence = require('run-sequence');
 gulp.task('build', done =>
   runSequence(
     'clean:build',
-    [
-      'copy',
-      'scripts:minify',
-      'css:minify',
-    ],
+    ['copy', 'scripts:minify', 'css:minify'],
     'useref',
     done
   )
