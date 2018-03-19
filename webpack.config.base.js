@@ -60,16 +60,4 @@ module.exports = {
   node: {
     Buffer: false,
   },
-
-  devtool: ENV === 'production' ? 'source-map' : 'cheap-module-eval-source-map',
-
-  devServer: {
-    port: process.env.PORT || 8080,
-    host: 'localhost',
-    publicPath: '/',
-    contentBase: './src',
-    historyApiFallback: true,
-    open: true,
-    openPage: '',
-  },
 };
