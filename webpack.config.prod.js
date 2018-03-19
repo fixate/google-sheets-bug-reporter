@@ -8,7 +8,7 @@ module.exports = Object.assign({}, webpackBase, {
   plugins: webpackBase.plugins.concat([]),
 
   optimization: {
-    minimise: true,
+    minimize: true,
   },
 
   mode: 'production',
