@@ -8,14 +8,16 @@ module.exports = {
   dev: {
     data: {
       basePath: '',
-      googleSheetsUrl: 'devsheet-address',
+      googleSheetsUrl: `https://script.google.com/macros/s/${process.env.GOOGLE_SHEETS_ID_DEV}/dev`,
     },
   },
 
   dist: {
     data: {
       basePath: '',
-      googleSheetsUrl: 'prodsheet-address',
+      googleSheetsUrl: `https://script.google.com/macros/s/${
+        process.env.GOOGLE_SHEETS_ID_PROD
+      }/exec`,
     },
   },
 };

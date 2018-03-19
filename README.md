@@ -32,7 +32,7 @@ $ npm run build
 Deploy to AWS:
 
 ```shell
-# add environment variables to .env, and use autoenv
+# add environment variables to .env
 $ npm run deploy:aws
 ```
 
