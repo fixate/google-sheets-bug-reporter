@@ -1,22 +1,15 @@
 {
   "parser": "babel-eslint",
-  "extends": ["plugin:react/recommended", "eslint:recommended", "prettier"],
-  "plugins": ["prettier", "react"],
+  "extends": ["eslint:recommended", "prettier"],
+  "plugins": ["prettier"],
   "env": {
     "browser": true,
     "node": true,
     "es6": true
   },
-  "settings": {
-    "react": {
-      "pragma": "h"
-    }
-  },
   "rules": {
     "strict": 0,
     "no-nested-ternary": 0,
-    "react/prop-types": 0,
-    "react/no-unescaped-entities": 0,
     "no-param-reassign": [
       2,
       {
@@ -28,8 +21,7 @@
     "ecmaVersion": 7,
     "sourceType": "module",
     "ecmaFeatures": {
-      "experimentalObjectRestSpread": true,
-      "jsx": true
+      "experimentalObjectRestSpread": true
     }
   }
 }

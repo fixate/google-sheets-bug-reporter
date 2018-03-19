@@ -12,7 +12,6 @@
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.42",
     "@babel/preset-env": "^7.0.0-beta.42",
-    "@babel/preset-react": "^7.0.0-beta.42",
     "babel-loader": "^8.0.0-beta.2",
     "babel-tape-runner": "^2.0.1",
     "browser-sync": "^2.23.6",
@@ -20,8 +19,6 @@
     "del": "^3.0.0",
     "enzyme": "^3.3.0",
     "eslint": "^4.19.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.7.0",
     "eslint-config-prettier": "^2.7.0",
     "eslint-config-synacor": "^1.1.0",
     "eslint-plugin-prettier": "^2.3.1",
@@ -51,16 +48,10 @@
     "gulp-util": "^3.0.8",
     "gulp-watch": "^5.0.0",
     "imagemin-pngquant": "^5.1.0",
-    "jsx-loader": "^0.13.2",
     "moment": "^2.21.0",
     "npm-check-updates": "^2.14.1",
     "prettier": "^1.11.1",
     "pug": "^2.0.1",
-    "react-addons-test-utils": "^15.6.2",
-    "react-hot-loader": "^4.0.0",
-    "react-router": "^4.2.0",
-    "react-router-redux": "^4.0.8",
-    "redux-mock-store": "^1.5.1",
     "require-dir": "^1.0.0",
     "run-sequence": "^2.2.1",
     "sinon": "^4.4.6",
@@ -73,8 +64,6 @@
   },
   "dependencies": {
     "@f/serialize-form": "^1.0.0",
-    "babel-polyfill": "^6.26.0",
-    "object.assign": "^4.1.0",
     "validate.js": "^0.12.0",
     "whatwg-fetch": "^2.0.3"
   }
